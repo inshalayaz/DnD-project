@@ -1,6 +1,7 @@
 import { Router } from "express";
 import User from "../../models/User.mjs";
 import CryptoJs from "crypto-js";
+import { createToken } from "./jwt.mjs";
 
 const router = Router();
 
@@ -26,6 +27,26 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login");
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ where: { email: email } });
+
+  if (user) {
+    var bytes = CryptoJs.AES.decrypt(user.password, process.env.SECRET_KEY);
+    var originalText = bytes.toString(CryptoJs.enc.Utf8);
+
+    originalText !== req.body.password &&
+      res.status(410).json("Wrong Email Or Password");
+
+    const accessToken = createToken(user);
+
+    const { password, ...info } = user.dataValues;
+
+    res.status(200).json({ ...info, accessToken });
+  } else {
+    res.status(400).json({ message: "Incorrect Email Or Password" });
+  }
+});
 
 export default router;
