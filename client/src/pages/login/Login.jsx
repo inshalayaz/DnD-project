@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import "react-toastify/dist/ReactToastify.css";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,6 +17,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link as LinkR } from "react-router-dom";
 import { AuthContext } from "../../context/authContext/AuthContext";
 import { login } from "../../context/authContext/apiCalls";
+import { ToastContainer, toast } from "react-toastify";
 
 function Copyright(props) {
   return (
@@ -37,7 +40,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
-  const { isFetching, dispatch } = useContext(AuthContext);
+  const { isFetching, dispatch, user, errorMessage, error } =
+    useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -48,6 +52,27 @@ export default function Login() {
       { email: data.get("email"), password: data.get("password") },
       dispatch
     );
+    if (error) {
+      toast.error(errorMessage, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.success("Logged In Successfully", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (
@@ -103,10 +128,21 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              disabled={isFetching}
+              // disabled={isFetching}
             >
               Sign In
             </Button>
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

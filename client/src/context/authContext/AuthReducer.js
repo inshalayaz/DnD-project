@@ -20,6 +20,7 @@ export const authReducer = (state, action) => {
         user: null,
         isFetching: false,
         error: true,
+        errorMessage: action.payload,
       };
 
     default:

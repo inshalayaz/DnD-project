@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
     var originalText = bytes.toString(CryptoJs.enc.Utf8);
 
     if (originalText !== req.body.password) {
-      res.status(410).json("Wrong Email Or Password");
+      res.status(400).json({ message: "Wrong Email Or Password" });
     } else {
       const accessToken = createToken(user);
 

@@ -11,9 +11,9 @@ export const login = async (user, dispatch) => {
         "Access-Control-Allow-Credentials": true,
       },
     });
-    window.location = "http://localhost:3000/";
+    // window.location = "http://localhost:3000/";
     dispatch(loginSuccess(res.data));
   } catch (error) {
-    dispatch(loginFail());
+    dispatch(loginFail(error.response.data.message));
   }
 };
