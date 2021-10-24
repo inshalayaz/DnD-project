@@ -40,8 +40,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
-  const { isFetching, dispatch, user, errorMessage, error } =
-    useContext(AuthContext);
+  const { dispatch, errorMessage, error } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();

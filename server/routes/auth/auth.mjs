@@ -8,22 +8,31 @@ const router = Router();
 const { AES } = CryptoJs;
 
 router.post("/register", async (req, res) => {
-  const { username, email } = req.body;
+  const { username, email, password } = req.body;
 
-  try {
-    const user = await User.create({
-      username: username,
-      email: email,
-      password: AES.encrypt(
-        req.body.password,
-        process.env.SECRET_KEY
-      ).toString(),
-    });
+  const emailExists = await User.findOne({ where: { email: email } });
+  const usernameExists = await User.findOne({ where: { username: username } });
 
-    res.status(201).json({ message: "Registered Successfully" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+  if (emailExists) {
+    res.status(410).json({ message: "Email already Registered" });
+  } else if (usernameExists) {
+    res.status(410).json({ message: "Username already Taken" });
+  } else {
+    try {
+      const user = await User.create({
+        username: username,
+        email: email,
+        password: AES.encrypt(
+          req.body.password,
+          process.env.SECRET_KEY
+        ).toString(),
+      });
+
+      res.status(201).json({ message: "Registered Successfully" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+    }
   }
 });
 

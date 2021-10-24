@@ -10,10 +10,10 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext/AuthContext";
+import { RegisterContextProvider } from "./context/registerContext/RegisterContext";
 
 function App() {
-  const { user, errorMessage } = useContext(AuthContext);
-  console.log(errorMessage);
+  const { user } = useContext(AuthContext);
   return (
     <div className="App">
       <Router>
@@ -23,7 +23,9 @@ function App() {
           </Route>
           <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
           <Route path="/register">
-            <Register />
+            <RegisterContextProvider>
+              <Register />
+            </RegisterContextProvider>
           </Route>
         </Switch>
       </Router>

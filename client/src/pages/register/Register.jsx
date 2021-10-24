@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -13,6 +11,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link as LinkR } from "react-router-dom";
+import { register } from "../../context/registerContext/apiCalls";
+import { RegisterContext } from "../../context/registerContext/RegisterContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Copyright(props) {
   return (
@@ -35,9 +37,41 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Register() {
+  const { dispatch, message, error } = React.useContext(RegisterContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    register(
+      {
+        username: data.get("username"),
+        email: data.get("email"),
+        password: data.get("password"),
+      },
+      dispatch
+    );
+
+    if (error) {
+      toast.error(message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.success(message, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   return (
@@ -68,11 +102,11 @@ export default function Register() {
               <Grid item xs={12} sm={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="name"
+                  name="username"
                   required
                   fullWidth
-                  id="name"
-                  label="Name"
+                  id="username"
+                  label="Username"
                   autoFocus
                 />
               </Grid>
@@ -97,14 +131,6 @@ export default function Register() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
             </Grid>
             <Button
               type="submit"
@@ -114,6 +140,17 @@ export default function Register() {
             >
               Sign Up
             </Button>
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <LinkR to="/login">
