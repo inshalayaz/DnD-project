@@ -34,7 +34,7 @@ const FieldList = [
 
 function DashboardContent() {
   const [board, setBoard] = useState([]);
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [, drop] = useDrop(() => ({
     accept: "INPUT",
     drop: (item) => addImageToBoard(item.id),
     collect: (monitor) => ({

@@ -1,9 +1,8 @@
 import { Divider, Typography } from "@mui/material";
-import React, { useRef } from "react";
-import { useDrag, useDrop } from "react-dnd";
+import { useDrag } from "react-dnd";
 
 const Item = ({ id, type }) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [, drag] = useDrag(() => ({
     type: "INPUT",
     item: { id: id },
     collect: (monitor) => ({
