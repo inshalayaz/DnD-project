@@ -11,6 +11,7 @@ import Register from "./pages/register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext/AuthContext";
 import { RegisterContextProvider } from "./context/registerContext/RegisterContext";
+import DndForm from "./pages/dndFrom/DndForm";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -20,6 +21,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/form">
+            <DndForm />
           </Route>
           <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
           <Route path="/register">
