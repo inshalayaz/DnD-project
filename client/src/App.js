@@ -11,6 +11,8 @@ import Register from "./pages/register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext/AuthContext";
 import { RegisterContextProvider } from "./context/registerContext/RegisterContext";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import DndForm from "./pages/dndFrom/DndForm";
 
 function App() {
@@ -23,7 +25,9 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/form">
-            <DndForm />
+            <DndProvider backend={HTML5Backend}>
+              <DndForm />
+            </DndProvider>
           </Route>
           <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
           <Route path="/register">
