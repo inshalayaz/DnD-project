@@ -1,7 +1,7 @@
-import { Badge, IconButton, styled, Toolbar, Typography } from "@mui/material";
+import { IconButton, styled, Toolbar, Typography } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+// import NotificationsIcon from "@mui/icons-material/Notifications";
 
 import React from "react";
 

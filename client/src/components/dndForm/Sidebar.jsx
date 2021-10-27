@@ -1,7 +1,7 @@
-import { Divider, IconButton, Toolbar, Typography } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { Divider, Toolbar } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import { FieldList } from "../../pages/dndFrom/Fields";
 
 import React from "react";
 import Item from "./Item";
@@ -34,24 +34,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const mdTheme = createTheme();
-const FieldList = [
-  {
-    id: 1,
-    type: "text",
-  },
-  {
-    id: 2,
-    type: "radio",
-  },
-  {
-    id: 3,
-    type: "checkbox",
-  },
-  {
-    id: 4,
-    type: "email",
-  },
-];
+
 const Sidebar = () => {
   const [open] = React.useState(true);
 
@@ -65,11 +48,7 @@ const Sidebar = () => {
             justifyContent: "flex-end",
             px: [1],
           }}
-        >
-          <IconButton>
-            <ChevronLeftIcon />
-          </IconButton>
-        </Toolbar>
+        ></Toolbar>
         <Divider />
         {FieldList.map((item) => (
           <Item type={item.type} id={item.id} />

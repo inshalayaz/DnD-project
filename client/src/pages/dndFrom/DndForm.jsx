@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -9,31 +9,14 @@ import Paper from "@mui/material/Paper";
 import Sidebar from "../../components/dndForm/Sidebar";
 import Appbar from "../../components/dndForm/Appbar";
 import { Button, Typography } from "@mui/material";
-import { useDrop } from "react-dnd";
+import { DndContext, useDrop } from "react-dnd";
+import { FieldList } from "./Fields";
 
 const mdTheme = createTheme();
 
-const FieldList = [
-  {
-    id: 1,
-    type: "text",
-  },
-  {
-    id: 2,
-    type: "radio",
-  },
-  {
-    id: 3,
-    type: "checkbox",
-  },
-  {
-    id: 4,
-    type: "email",
-  },
-];
-
 function DashboardContent() {
   const [board, setBoard] = useState([]);
+
   const [, drop] = useDrop(() => ({
     accept: "INPUT",
     drop: (item) => addImageToBoard(item.id),
