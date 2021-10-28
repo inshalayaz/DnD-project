@@ -5,11 +5,11 @@ const { DataTypes } = Sequelize;
 
 const { STRING } = DataTypes;
 
-const Field = sequelize.define("Field", {
+const FieldItem = sequelize.define("FieldItem", {
   type: {
     type: STRING,
     allowNull: false,
   },
 });
 
-export default Field;
+export default FieldItem;

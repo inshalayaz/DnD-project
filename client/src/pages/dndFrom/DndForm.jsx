@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -10,7 +10,6 @@ import Sidebar from "../../components/dndForm/Sidebar";
 import Appbar from "../../components/dndForm/Appbar";
 import { Button, Typography } from "@mui/material";
 import { useDrop } from "react-dnd";
-import { FieldList } from "./Fields";
 import { DndContext } from "../../context/dndContext/DndContext";
 import { getFields } from "../../context/dndContext/apiCall";
 
@@ -32,7 +31,7 @@ function DashboardContent() {
       console.log(data);
       setFields(data);
     });
-  }, []);
+  }, [setFields]);
 
   const addImageToBoard = (id) => {
     const item = fields.filter((field) => id === field.id);

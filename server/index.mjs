@@ -18,6 +18,7 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api/auth", authRoute);
+app.use(express.json());
 app.use("/api/fields", fieldRoute);
 
 sequilize.sync().then((req) => {

@@ -1,7 +1,6 @@
 import { Divider, Toolbar } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import { FieldList } from "../../pages/dndFrom/Fields";
 
 import React, { useContext } from "react";
 import Item from "./Item";
