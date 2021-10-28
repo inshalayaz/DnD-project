@@ -8,15 +8,17 @@ import {
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./context/authContext/AuthContext";
 import { RegisterContextProvider } from "./context/registerContext/RegisterContext";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DndForm from "./pages/dndFrom/DndForm";
+import { DndContextProvider } from "./context/dndContext/DndContext";
 
 function App() {
   const { user } = useContext(AuthContext);
+
   return (
     <div className="App">
       <Router>
@@ -25,9 +27,11 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/form">
-            <DndProvider backend={HTML5Backend}>
-              <DndForm />
-            </DndProvider>
+            <DndContextProvider>
+              <DndProvider backend={HTML5Backend}>
+                <DndForm />
+              </DndProvider>
+            </DndContextProvider>
           </Route>
           <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
           <Route path="/register">

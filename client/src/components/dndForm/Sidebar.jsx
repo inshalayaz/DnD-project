@@ -3,8 +3,9 @@ import MuiDrawer from "@mui/material/Drawer";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { FieldList } from "../../pages/dndFrom/Fields";
 
-import React from "react";
+import React, { useContext } from "react";
 import Item from "./Item";
+import { DndContext } from "../../context/dndContext/DndContext";
 
 const drawerWidth = 240;
 const Drawer = styled(MuiDrawer, {
@@ -36,6 +37,8 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 const Sidebar = () => {
+  const { fields } = useContext(DndContext);
+
   const [open] = React.useState(true);
 
   return (
@@ -50,7 +53,7 @@ const Sidebar = () => {
           }}
         ></Toolbar>
         <Divider />
-        {FieldList.map((item) => (
+        {fields?.map((item) => (
           <Item type={item.type} id={item.id} />
         ))}
       </Drawer>

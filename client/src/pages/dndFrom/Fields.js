@@ -4,15 +4,15 @@ export const FieldList = [
     type: "text",
   },
   {
-    id: 2,
+    id: 100,
     type: "radio",
   },
   {
-    id: 3,
+    id: 200,
     type: "checkbox",
   },
   {
-    id: 4,
+    id: 300,
     type: "email",
   },
 ];

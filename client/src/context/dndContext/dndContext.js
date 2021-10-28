@@ -1,5 +1,13 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-const dndContext = createContext();
+export const DndContext = createContext({});
 
-export default dndContext;
+export const DndContextProvider = ({ children }) => {
+  const [board, setBoard] = useState([]);
+  const [fields, setFields] = useState([]);
+  return (
+    <DndContext.Provider value={{ board, setBoard, fields, setFields }}>
+      {children}
+    </DndContext.Provider>
+  );
+};

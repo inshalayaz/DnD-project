@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -9,13 +9,15 @@ import Paper from "@mui/material/Paper";
 import Sidebar from "../../components/dndForm/Sidebar";
 import Appbar from "../../components/dndForm/Appbar";
 import { Button, Typography } from "@mui/material";
-import { DndContext, useDrop } from "react-dnd";
+import { useDrop } from "react-dnd";
 import { FieldList } from "./Fields";
+import { DndContext } from "../../context/dndContext/DndContext";
+import { getFields } from "../../context/dndContext/apiCall";
 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const [board, setBoard] = useState([]);
+  const { board, setBoard, fields, setFields } = useContext(DndContext);
 
   const [, drop] = useDrop(() => ({
     accept: "INPUT",
@@ -25,8 +27,19 @@ function DashboardContent() {
     }),
   }));
 
+  useEffect(() => {
+    getFields().then((data) => {
+      console.log(data);
+      setFields(data);
+    });
+  }, []);
+
   const addImageToBoard = (id) => {
-    const item = FieldList.filter((field) => id === field.id);
+    const item = fields.filter((field) => id === field.id);
+    // FieldList[id - 1].id += 1;
+    // console.log((FieldList[id - 1].id += 1));
+    // console.log(FieldList[id - 1]);
+
     setBoard((board) => [...board, item[0]]);
   };
 
