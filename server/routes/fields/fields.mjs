@@ -29,7 +29,6 @@ router.post("/", async (req, res) => {
 
 router.post("/field-item", async (req, res) => {
   const { type } = req.body;
-
   try {
     const item = await FieldItem.create({
       type: type,

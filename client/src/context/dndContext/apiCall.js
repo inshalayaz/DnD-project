@@ -11,14 +11,19 @@ export const getFields = async () => {
 
 export const createField = async (type) => {
   try {
-    axios.post("http://localhost:3001/api/fields/field-item", type, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
-      },
-    });
+    const res = await axios.post(
+      "http://localhost:3001/api/fields/field-item",
+      type,
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      }
+    );
+    return res.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.message);
   }
 };

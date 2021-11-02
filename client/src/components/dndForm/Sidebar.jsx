@@ -5,6 +5,7 @@ import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useContext } from "react";
 import Item from "./Item";
 import { DndContext } from "../../context/dndContext/DndContext";
+import { FieldList } from "../../pages/dndFrom/Fields";
 
 const drawerWidth = 240;
 const Drawer = styled(MuiDrawer, {
@@ -52,7 +53,7 @@ const Sidebar = () => {
           }}
         ></Toolbar>
         <Divider />
-        {fields?.map((item) => (
+        {FieldList?.map((item) => (
           <Item type={item.type} id={item.id} />
         ))}
       </Drawer>

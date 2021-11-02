@@ -4,7 +4,7 @@ import { useDrag } from "react-dnd";
 const Item = ({ id, type }) => {
   const [, drag] = useDrag(() => ({
     type: "INPUT",
-    item: { id: id },
+    item: { type: type },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -11,40 +11,42 @@ import Appbar from "../../components/dndForm/Appbar";
 import { Button, Typography } from "@mui/material";
 import { useDrop } from "react-dnd";
 import { DndContext } from "../../context/dndContext/DndContext";
-import { getFields } from "../../context/dndContext/apiCall";
+// import { getFields } from "../../context/dndContext/apiCall";
+import { v4 as uuidv4 } from "uuid";
+import { FieldList } from "./Fields";
 
 const mdTheme = createTheme();
 
 function DashboardContent() {
   const { board, setBoard, fields, setFields } = useContext(DndContext);
 
+  const formRef = useRef();
+
   const [, drop] = useDrop(() => ({
     accept: "INPUT",
-    drop: (item) => addImageToBoard(item.id),
+    drop: (item) => addImageToBoard(item.type),
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
   }));
 
-  useEffect(() => {
-    getFields().then((data) => {
-      console.log(data);
-      setFields(data);
-    });
-  }, [setFields]);
+  // useEffect(() => {
+  //   getFields().then((data) => {
+  //     console.log(data);
+  //     setFields(data);
+  //   });
+  // }, [setFields]);
 
-  const addImageToBoard = (id) => {
-    const item = fields.filter((field) => id === field.id);
-    // FieldList[id - 1].id += 1;
-    // console.log((FieldList[id - 1].id += 1));
-    // console.log(FieldList[id - 1]);
+  const addImageToBoard = async (type) => {
+    const uuid = uuidv4();
 
-    setBoard((board) => [...board, item[0]]);
+    const newItem = { uuid, type };
+    setBoard((board) => [...board, newItem]);
   };
 
-  const removeField = (e, id) => {
+  const removeField = (e, uuid) => {
     console.log(board);
-    const newBoard = board.filter((field) => id !== field.id);
+    const newBoard = board.filter((field) => uuid !== field.uuid);
     setBoard(newBoard);
   };
 
@@ -56,11 +58,11 @@ function DashboardContent() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
+
         {/* App Bar */}
         <Appbar />
 
         {/* Sidebar */}
-
         <Sidebar />
         <Box
           component="main"
@@ -92,11 +94,15 @@ function DashboardContent() {
                     style={{ marginTop: 20 }}
                     className="Board"
                     onSubmit={handleSubmit}
+                    ref={formRef}
                   >
                     {board.map((field) => {
+                      console.log(board);
+
                       return (
                         <div className="inputs">
                           <input
+                            key={field.id}
                             type={field.type}
                             id={field.id}
                             placeholder={field.type}
@@ -105,7 +111,7 @@ function DashboardContent() {
                           <Button
                             type="primary"
                             danger
-                            onClick={(e) => removeField(e, field.id)}
+                            onClick={(e) => removeField(e, field.uuid)}
                             className="btn"
                           >
                             Delete
@@ -114,6 +120,7 @@ function DashboardContent() {
                         </div>
                       );
                     })}
+
                     {board.length ? (
                       <button
                         type="submit"
