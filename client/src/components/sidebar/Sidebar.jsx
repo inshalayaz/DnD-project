@@ -47,6 +47,10 @@ const FieldItem = styled(Paper)(({ theme }) => ({
   margin: "30px 10px",
   boxShadow: "none",
   cursor: "pointer",
+  ":hover": {
+    border: " 1.5px dashed #3987d9  ",
+    // margin: " 29px 10px",
+  },
 }));
 
 const mdTheme = createTheme();
@@ -68,9 +72,9 @@ const Sidebar = () => {
           }}
         ></Toolbar>
         <Divider />
-        <Grid container spacing={1} classname="hello">
+        <Grid container spacing={1} className="hello">
           {FieldList?.map((item) => (
-            <Grid item xs={6} classname="box">
+            <Grid item xs={6} className="box" key={item.id}>
               <FieldItem>
                 <Item type={item.type} id={item.id} />
               </FieldItem>

@@ -92,7 +92,7 @@ function DashboardContent() {
                       // console.log(board);
 
                       return (
-                        <div className="inputs">
+                        <div className="inputs" key={field.uuid}>
                           <input
                             key={field.id}
                             type={field.type}
