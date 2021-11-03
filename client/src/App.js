@@ -14,7 +14,7 @@ import { RegisterContextProvider } from "./context/registerContext/RegisterConte
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import DndForm from "./pages/dndFrom/DndForm";
-import { DndContextProvider } from "./context/dndContext/DndContext";
+import { DndContextProvider } from "./context/dndContext/dndContext";
 
 function App() {
   const { user } = useContext(AuthContext);

@@ -10,7 +10,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Appbar from "../../components/dndForm/Appbar";
 import { Button, Typography } from "@mui/material";
 import { useDrop } from "react-dnd";
-import { DndContext } from "../../context/dndContext/DndContext";
+import { DndContext } from "../../context/dndContext/dndContext";
 // import { getFields } from "../../context/dndContext/apiCall";
 import { v4 as uuidv4 } from "uuid";
 
