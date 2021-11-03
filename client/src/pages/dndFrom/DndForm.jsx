@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -13,12 +13,11 @@ import { useDrop } from "react-dnd";
 import { DndContext } from "../../context/dndContext/DndContext";
 // import { getFields } from "../../context/dndContext/apiCall";
 import { v4 as uuidv4 } from "uuid";
-import { FieldList } from "./Fields";
 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const { board, setBoard, fields, setFields } = useContext(DndContext);
+  const { board, setBoard } = useContext(DndContext);
 
   const formRef = useRef();
 

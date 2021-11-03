@@ -5,9 +5,8 @@ import Paper from "@mui/material/Paper";
 
 import Grid from "@mui/material/Grid";
 
-import React, { useContext } from "react";
+import React from "react";
 import Item from "../dndForm/Item";
-import { DndContext } from "../../context/dndContext/DndContext";
 import { FieldList } from "../../pages/dndFrom/Fields";
 import "./style.css";
 
