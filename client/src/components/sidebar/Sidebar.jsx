@@ -1,13 +1,17 @@
 import { Divider, Toolbar } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+
+import Grid from "@mui/material/Grid";
 
 import React, { useContext } from "react";
-import Item from "./Item";
+import Item from "../dndForm/Item";
 import { DndContext } from "../../context/dndContext/DndContext";
 import { FieldList } from "../../pages/dndFrom/Fields";
+import "./style.css";
 
-const drawerWidth = 240;
+const drawerWidth = 340;
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -19,6 +23,7 @@ const Drawer = styled(MuiDrawer, {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    background: "#f4f6fa",
     boxSizing: "border-box",
     ...(!open && {
       overflowX: "hidden",
@@ -34,10 +39,21 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
+const FieldItem = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+  borderRadius: 0,
+  margin: "30px 10px",
+  boxShadow: "none",
+  cursor: "pointer",
+}));
+
 const mdTheme = createTheme();
 
 const Sidebar = () => {
-  const { fields } = useContext(DndContext);
+  // const { fields } = useContext(DndContext);
 
   const [open] = React.useState(true);
 
@@ -53,9 +69,15 @@ const Sidebar = () => {
           }}
         ></Toolbar>
         <Divider />
-        {FieldList?.map((item) => (
-          <Item type={item.type} id={item.id} />
-        ))}
+        <Grid container spacing={1} classname="hello">
+          {FieldList?.map((item) => (
+            <Grid item xs={6} classname="box">
+              <FieldItem>
+                <Item type={item.type} id={item.id} />
+              </FieldItem>
+            </Grid>
+          ))}
+        </Grid>
       </Drawer>
     </ThemeProvider>
   );

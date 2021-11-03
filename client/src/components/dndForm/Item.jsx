@@ -1,4 +1,4 @@
-import { Divider, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useDrag } from "react-dnd";
 
 const Item = ({ id, type }) => {
@@ -13,9 +13,9 @@ const Item = ({ id, type }) => {
   return (
     <div>
       <Typography variant="body1" key={id} style={{ marginTop: 20 }} ref={drag}>
-        {type}
+        {type.toUpperCase()}
       </Typography>
-      <Divider />
+      {/* <Divider /> */}
     </div>
   );
 };

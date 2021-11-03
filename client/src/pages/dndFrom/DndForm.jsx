@@ -6,7 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Sidebar from "../../components/dndForm/Sidebar";
+import Sidebar from "../../components/sidebar/Sidebar";
 import Appbar from "../../components/dndForm/Appbar";
 import { Button, Typography } from "@mui/material";
 import { useDrop } from "react-dnd";
@@ -29,13 +29,6 @@ function DashboardContent() {
       isOver: !!monitor.isOver(),
     }),
   }));
-
-  // useEffect(() => {
-  //   getFields().then((data) => {
-  //     console.log(data);
-  //     setFields(data);
-  //   });
-  // }, [setFields]);
 
   const addImageToBoard = async (type) => {
     const uuid = uuidv4();
@@ -97,7 +90,7 @@ function DashboardContent() {
                     ref={formRef}
                   >
                     {board.map((field) => {
-                      console.log(board);
+                      // console.log(board);
 
                       return (
                         <div className="inputs">

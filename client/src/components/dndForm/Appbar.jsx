@@ -23,7 +23,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const drawerWidth = 240;
+const drawerWidth = 340;
 
 const Appbar = () => {
   const [open, setOpen] = React.useState(true);
