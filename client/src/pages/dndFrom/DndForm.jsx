@@ -107,14 +107,12 @@ function DashboardContent() {
                               />
                             </Grid>
                             <Grid item xs={1} className="delete-box">
-                              <Button
-                                type="primary"
-                                danger
+                              <DeleteIcon
                                 onClick={(e) => removeField(e, field.uuid)}
-                                className="btn delete-btn"
-                              >
-                                <DeleteIcon />
-                              </Button>
+                                className="delete-btn"
+                                color="primary"
+                                fontSize="large"
+                              />
                               <br />
                             </Grid>
                           </Grid>

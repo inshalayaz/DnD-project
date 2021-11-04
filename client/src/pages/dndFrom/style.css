@@ -4,9 +4,16 @@
 }
 .inputs:hover .input-box{
     border: 1.5px dashed #3987d9;
+    
+    
 }
 .inputs:hover .delete-box{
     border: 1.5px dashed #3987d9;
+   
+}
+
+.inputs{
+    display: flex;
 }
 
 .input{
@@ -15,16 +22,19 @@
 }
 
 
+
 .delete-btn{
     padding: 0!important;
     height: 100%;
-    border: 1.5px dashed #3987d9;
+    cursor: pointer;
 }
 
 
 
 .delete-box{
     padding: 0px!important;
+   
+
 }
 
 .main-form {
