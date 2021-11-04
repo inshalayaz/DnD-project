@@ -1,0 +1,36 @@
+
+.inputs:hover .input{
+    border: none;
+}
+.inputs:hover .input-box{
+    border: 1.5px dashed #3987d9;
+}
+.inputs:hover .delete-box{
+    border: 1.5px dashed #3987d9;
+}
+
+.input{
+    width: 100%;
+    padding: 10px;
+}
+
+
+.delete-btn{
+    padding: 0!important;
+    height: 100%;
+    border: 1.5px dashed #3987d9;
+}
+
+
+
+.delete-box{
+    padding: 0px!important;
+}
+
+.main-form {
+    margin-left: 0px!important;
+    margin-top: 0px!important;
+    width: 100%!important;
+    
+    margin-top: 10px!important;
+}

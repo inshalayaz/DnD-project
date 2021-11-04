@@ -4,7 +4,6 @@ import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 
 import Grid from "@mui/material/Grid";
-
 import React from "react";
 import Item from "../dndForm/Item";
 import { FieldList } from "../../pages/dndFrom/Fields";
@@ -56,8 +55,6 @@ const FieldItem = styled(Paper)(({ theme }) => ({
 const mdTheme = createTheme();
 
 const Sidebar = () => {
-  // const { fields } = useContext(DndContext);
-
   const [open] = React.useState(true);
 
   return (
@@ -72,9 +69,9 @@ const Sidebar = () => {
           }}
         ></Toolbar>
         <Divider />
-        <Grid container spacing={1} className="hello">
+        <Grid container spacing={1}>
           {FieldList?.map((item) => (
-            <Grid item xs={6} className="box" key={item.id}>
+            <Grid item xs={6} key={item.id}>
               <FieldItem>
                 <Item type={item.type} id={item.id} />
               </FieldItem>

@@ -9,9 +9,11 @@ import Paper from "@mui/material/Paper";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Appbar from "../../components/dndForm/Appbar";
 import { Button, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useDrop } from "react-dnd";
 import { DndContext } from "../../context/dndContext/dndContext";
 // import { getFields } from "../../context/dndContext/apiCall";
+import "./style.css";
 import { v4 as uuidv4 } from "uuid";
 
 const mdTheme = createTheme();
@@ -59,13 +61,13 @@ function DashboardContent() {
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            // backgroundColor: (theme) =>
+            //   theme.palette.mode === "light"
+            //     ? theme.palette.grey[100]
+            //     : theme.palette.grey[900],
             flexGrow: 1,
             height: "100vh",
-            overflow: "auto",
+            overflowX: "hidden",
           }}
         >
           <Toolbar />
@@ -78,6 +80,7 @@ function DashboardContent() {
                     display: "flex",
                     flexDirection: "column",
                     height: 240,
+                    boxShadow: "none",
                   }}
                   ref={drop}
                 >
@@ -93,37 +96,31 @@ function DashboardContent() {
 
                       return (
                         <div className="inputs" key={field.uuid}>
-                          <input
-                            key={field.id}
-                            type={field.type}
-                            id={field.id}
-                            placeholder={field.type}
-                          />
-
-                          <Button
-                            type="primary"
-                            danger
-                            onClick={(e) => removeField(e, field.uuid)}
-                            className="btn"
-                          >
-                            Delete
-                          </Button>
-                          <br />
+                          <Grid container spacing={1} className="main-form">
+                            <Grid item xs={11} className="input-box">
+                              <input
+                                key={field.id}
+                                type={field.type}
+                                id={field.id}
+                                placeholder={field.type}
+                                className="input"
+                              />
+                            </Grid>
+                            <Grid item xs={1} className="delete-box">
+                              <Button
+                                type="primary"
+                                danger
+                                onClick={(e) => removeField(e, field.uuid)}
+                                className="btn delete-btn"
+                              >
+                                <DeleteIcon />
+                              </Button>
+                              <br />
+                            </Grid>
+                          </Grid>
                         </div>
                       );
                     })}
-
-                    {board.length ? (
-                      <button
-                        type="submit"
-                        value="Submit"
-                        style={{ marginTop: "30px" }}
-                      >
-                        Submit
-                      </button>
-                    ) : (
-                      ""
-                    )}
                   </form>
                 </Paper>
               </Grid>
